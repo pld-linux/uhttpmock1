@@ -7,14 +7,14 @@
 Summary:	HTTP web service mocking library
 Summary(pl.UTF-8):	Biblioteka do tworzenia atrap usług HTTP
 Name:		uhttpmock
-Version:	0.3.1
-Release:	3
+Version:	0.4.0
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://tecnocode.co.uk/downloads/uhttpmock/%{name}-%{version}.tar.xz
-# Source0-md5:	ea1a7d7ba0546dbabb6fd4389c21a11d
-URL:		https://gitorious.org/uhttpmock/pages/Home
-BuildRequires:	glib2-devel >= 1:2.32
+# Source0-md5:	3eb169b2db6715fcab1a1ac6f1ae7a9c
+URL:		https://gitlab.com/groups/uhttpmock
+BuildRequires:	glib2-devel >= 1:2.36
 BuildRequires:	gobject-introspection-devel >= 0.10
 BuildRequires:	gtk-doc >= 1.14
 BuildRequires:	libsoup-devel >= 2.48
@@ -22,7 +22,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	vala
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.32
+Requires:	glib2 >= 1:2.36
 Requires:	libsoup >= 2.48
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -41,7 +41,7 @@ Summary:	Header files for uhttpmock library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki uhttpmock
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.32
+Requires:	glib2-devel >= 1:2.36
 Requires:	libsoup-devel >= 2.48
 
 %description devel
