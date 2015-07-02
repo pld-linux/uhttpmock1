@@ -3,12 +3,12 @@
 %bcond_without	apidocs		# gtk-doc API documentation
 %bcond_without	static_libs	# static library
 %bcond_without	vala		# Vala API
-#
+
 Summary:	HTTP web service mocking library
 Summary(pl.UTF-8):	Biblioteka do tworzenia atrap usług HTTP
 Name:		uhttpmock
 Version:	0.4.0
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://tecnocode.co.uk/downloads/uhttpmock/%{name}-%{version}.tar.xz
@@ -80,6 +80,9 @@ Summary:	API documentation for uhttpmock library
 Summary(pl.UTF-8):	Dokumentacja API biblioteki uhttpmock
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 API documentation for uhttpmock library.
