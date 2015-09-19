@@ -7,12 +7,12 @@
 Summary:	HTTP web service mocking library
 Summary(pl.UTF-8):	Biblioteka do tworzenia atrap usług HTTP
 Name:		uhttpmock
-Version:	0.4.0
-Release:	2
+Version:	0.5.0
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://tecnocode.co.uk/downloads/uhttpmock/%{name}-%{version}.tar.xz
-# Source0-md5:	3eb169b2db6715fcab1a1ac6f1ae7a9c
+# Source0-md5:	ebc54cbbe9b6695282a179af223fe374
 URL:		https://gitlab.com/groups/uhttpmock
 BuildRequires:	glib2-devel >= 1:2.36
 BuildRequires:	gobject-introspection-devel >= 0.10
