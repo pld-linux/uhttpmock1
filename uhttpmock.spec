@@ -7,21 +7,23 @@
 Summary:	HTTP web service mocking library
 Summary(pl.UTF-8):	Biblioteka do tworzenia atrap usług HTTP
 Name:		uhttpmock
-Version:	0.5.0
-Release:	2
+Version:	0.5.1
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://tecnocode.co.uk/downloads/uhttpmock/%{name}-%{version}.tar.xz
-# Source0-md5:	ebc54cbbe9b6695282a179af223fe374
+#Source0Download: https://gitlab.com/uhttpmock/uhttpmock/tags
+Source0:	https://gitlab.com/uhttpmock/uhttpmock/repository/archive.tar.bz2?ref=%{version}&fake_out=/%{name}-%{version}.tar.bz2
+# Source0-md5:	40c3da90ece946db6ed936900d1b8ba5
 URL:		https://gitlab.com/groups/uhttpmock
+BuildRequires:	autoconf >= 2.65
+BuildRequires:	automake >= 1:1.9
 BuildRequires:	glib2-devel >= 1:2.36
 BuildRequires:	gobject-introspection-devel >= 0.10
 BuildRequires:	gtk-doc >= 1.14
 BuildRequires:	libsoup-devel >= 2.48
+BuildRequires:	libtool >= 2:2
 BuildRequires:	pkgconfig
-BuildRequires:	tar >= 1:1.22
 BuildRequires:	vala
-BuildRequires:	xz
 Requires:	glib2 >= 1:2.36
 Requires:	libsoup >= 2.48
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -94,10 +96,17 @@ API documentation for uhttpmock library.
 Dokumentacja API biblioteki uhttpmock.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-4ea243bee59521b2225ec3946c1db5ea934776a4
 
 %build
+%{__gtkdocize}
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
+	%{?with_apidocs:--enable-gtk-doc} \
 	--disable-silent-rules \
 	%{!?with_static_libs:--disable-static} \
 	--with-html-dir=%{_gtkdocdir}
