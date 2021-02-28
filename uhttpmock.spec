@@ -70,9 +70,7 @@ Summary(pl.UTF-8):	API języka Vala do biblioteki uhttpmock
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	vala
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description -n vala-libuhttpmock
 Vala API for uhttpmock library.
@@ -85,9 +83,7 @@ Summary:	API documentation for uhttpmock library
 Summary(pl.UTF-8):	Dokumentacja API biblioteki uhttpmock
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 API documentation for uhttpmock library.
