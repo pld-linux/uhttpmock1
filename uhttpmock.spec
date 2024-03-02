@@ -7,24 +7,25 @@
 Summary:	HTTP web service mocking library
 Summary(pl.UTF-8):	Biblioteka do tworzenia atrap usług HTTP
 Name:		uhttpmock
-Version:	0.5.3
+Version:	0.5.5
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-#Source0Download: https://gitlab.com/uhttpmock/uhttpmock/tags
-Source0:	https://gitlab.com/uhttpmock/uhttpmock/repository/archive.tar.bz2?ref=%{version}&fake_out=/%{name}-%{version}.tar.bz2
-# Source0-md5:	2ce00dc72d5f21ae5db779a2dc76cebd
-URL:		https://gitlab.com/groups/uhttpmock
-BuildRequires:	autoconf >= 2.65
-BuildRequires:	automake >= 1:1.9
-BuildRequires:	glib2-devel >= 1:2.36
+#Source0Download: https://gitlab.freedesktop.org/pwithnall/uhttpmock/tags
+Source0:	https://gitlab.freedesktop.org/pwithnall/uhttpmock/-/archive/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	f8099372cfecd2cbdb269a2516aaa831
+URL:		https://gitlab.freedesktop.org/pwithnall/uhttpmock
+BuildRequires:	glib2-devel >= 1:2.38
 BuildRequires:	gobject-introspection-devel >= 0.10
 BuildRequires:	gtk-doc >= 1.14
 BuildRequires:	libsoup-devel >= 2.48
-BuildRequires:	libtool >= 2:2
+BuildRequires:	meson
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
+BuildRequires:	rpm-build >= 4.6
+BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	vala
-Requires:	glib2 >= 1:2.36
+Requires:	glib2 >= 1:2.38
 Requires:	libsoup >= 2.48
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -43,7 +44,7 @@ Summary:	Header files for uhttpmock library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki uhttpmock
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.36
+Requires:	glib2-devel >= 1:2.38
 Requires:	libsoup-devel >= 2.48
 
 %description devel
@@ -92,30 +93,19 @@ API documentation for uhttpmock library.
 Dokumentacja API biblioteki uhttpmock.
 
 %prep
-%setup -q -n %{name}-%{version}-a7f61360d387e2b8fcbdee33f7be17fae2ab9e55
+%setup -q
 
 %build
-%{__gtkdocize}
-%{__libtoolize}
-%{__aclocal} -I m4
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	%{?with_apidocs:--enable-gtk-doc} \
-	--disable-silent-rules \
-	%{!?with_static_libs:--disable-static} \
-	--with-html-dir=%{_gtkdocdir}
-%{__make}
+%meson build
+
+%ninja_build -C build \
+	%{!?with_static_libs:--default-library=shared} \
+	%{!?with_apidocs:-Dgtk_doc=false}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
-
-# obsoleted by pkg-config
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libuhttpmock-0.0.la
+%ninja_install -C build
 
 %clean
 rm -rf $RPM_BUILD_ROOT
