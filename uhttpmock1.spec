@@ -97,11 +97,11 @@ Dokumentacja API biblioteki uhttpmock.
 %setup -q -n uhttpmock-%{version}
 
 %build
-%meson build
-
-%ninja_build -C build \
+%meson build \
 	%{!?with_static_libs:--default-library=shared} \
 	%{!?with_apidocs:-Dgtk_doc=false}
+
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
